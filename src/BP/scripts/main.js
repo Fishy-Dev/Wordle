@@ -10,6 +10,9 @@ world.afterEvents.worldLoad.subscribe(()=>{
     world.beforeEvents.chatSend.subscribe((event)=>{
         if (event.message.toLowerCase() == "!wordle"){
             event.cancel = true
+            if (Games.get(event.sender.id).end){
+                Games.delete(event.sender.id)
+            }
             if (Games.has(event.sender.id)){
                 event.sender.sendMessage("§a[§rWordle§a]§r§c You are already in a game of worldle")
                 return
