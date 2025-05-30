@@ -10,7 +10,7 @@ world.afterEvents.worldLoad.subscribe(()=>{
     world.beforeEvents.chatSend.subscribe((event)=>{
         if (event.message.toLowerCase() == "!wordle"){
             event.cancel = true
-            if (Games.get(event.sender.id).end){
+            if (Games.get(event.sender.id)?.end){
                 Games.delete(event.sender.id)
             }
             if (Games.has(event.sender.id)){
