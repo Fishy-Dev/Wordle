@@ -1,137 +1,130 @@
-Here’s a cleaned-up and corrected version of your `README.md`:
+```markdown
+# Minecraft Bedrock Wordle Add-On
 
-````markdown
-# 🟩 Minecraft Bedrock Wordle Add-On
-
-A simple **Wordle-style mini-game** for Minecraft Bedrock Edition, built using the JavaScript Scripting API. Players can start a game from chat, guess words, and receive visual feedback via colored glyphs—just like the classic Wordle.
+A simple “Wordle”–style mini-game for Minecraft Bedrock Edition, built with the official JavaScript Scripting API. Players can start a new Wordle game in chat, then guess letters against a hidden word of configurable length. Colored glyphs (green, yellow, black) display feedback exactly like classic Wordle.
 
 ---
 
 ## 📦 Features
 
-- **Chat Commands**  
-  - `!wordle` — Start a new Wordle game  
-  - `!guess <word>` — Submit a guess
-
-- **Customizable Settings**  
-  - Configure word length and max guesses in `config.js`  
-  - Customize glyphs and color mappings in `letters.js`
-
-- **Per-Player Game Sessions**  
-  - Each player runs their own independent Wordle game
-
-- **Visual Feedback**  
-  - Colored Unicode glyphs show per-letter feedback  
-  - Accurate handling of repeated letters (green/yellow/black logic)
+- **Chat Commands**:  
+  - `!wordle` — start a new game  
+  - `!guess <word>` — submit a guess  
+- **Configurable**:  
+  - Word length and max guesses via `config.js`  
+  - Custom color/glyph mappings via `letters.js`  
+- **Visual Feedback**:  
+  - Unicode glyphs colored per‐letter (green/yellow/black)  
+  - Two‐pass algorithm ensures correct handling of repeated letters  
+- **Per‐Player Games**:  
+  - Each player can run their own concurrent game  
 
 ---
 
 ## 📋 Prerequisites
 
 - **Minecraft Bedrock Edition** (1.20+ recommended)  
-- **Bedrock Dedicated Server** or a local world with scripting enabled  
-- **Node.js** (optional — for development tooling)
+- **Bedrock Dedicated Server** or local Bedrock development with scripting enabled  
+- **Node.js** (optional—for tooling if you want to build/transpile)  
 
 ---
 
-## 🚀 Installation
+## 📁 Repository Structure
 
-1. Clone or download this repo into your behavior pack’s `scripts/` folder  
-2. Make sure your `manifest.json` includes:
-   ```json
-   {
-     "modules": [
-       {
-         "type": "script",
-         "language": "javascript",
-         "entry": "scripts/index.js"
-       }
-     ]
-   }
+```
+
+/wordle-bedrock-addon
+├── behavior\_pack/
+│   ├── manifest.json
+│   └── … (optional custom behavior definitions)
+│
+├── scripts/                # Bedrock scripting pack
+│   ├── game.js             # Game logic (Wordle class)
+│   ├── letters.js          # Unicode color glyph mappings
+│   ├── index.js            # Entry point: chat event handlers
+│   └── config.js           # Game settings (wordLength, maxGuesses, etc.)
+│
+├── README.md               # This file
+└── package.json            # (Optional) for dependency management
+
 ````
 
-3. Enable "Beta APIs" in your world’s Experimental settings
-4. Launch the world with this behavior pack enabled
+---
+
+1. **Configure** `scripts/config.js` if you want to change:
+
+   ```js
+   export default {
+     wordLength: 5,
+     maxGuesses: 6,
+     // ...other settings
+   };
+   ```
+
+2. **Launch** Minecraft Bedrock, enable “Beta-Api” on this pack in your world’s Add-On settings, then enter the world.
 
 ---
 
 ## 🎮 Usage
 
-**Start a game**
-In chat, type:
+* **Start a game**
+  In chat, type:
 
-```
-!wordle
-```
+  ```
+  !wordle
+  ```
 
-**Submit a guess**
+  You’ll see a “You started a game of Wordle” message.
 
-```
-!guess crane
-```
+* **Make a guess**
+  Type:
 
-You'll receive feedback with colored glyphs:
+  ```
+  !guess crane
+  ```
 
-* 🟩 Green = correct letter in correct spot
-* 🟨 Yellow = correct letter in wrong spot
-* ⬛ Black = letter not in the word
+  You’ll receive a colored glyph row showing which letters are correct (green), present (yellow), or absent (black).
 
-**Game End**
-
-* You win by guessing the word in the allowed attempts
-* If you fail, the correct word is revealed
-* Use `!wordle` again to start a new game
+* **Game over**
+  You win if you guess in ≤ maxGuesses. You lose if you exceed maxGuesses—then the correct word is revealed. After the game ends, you can start a new one with `!wordle`.
 
 ---
 
 ## ⚙️ Configuration
 
-Edit `scripts/config.js` to customize:
+Edit `scripts/config.js` to adjust:
 
 ```js
 export default {
   wordLength: 5,      // number of letters per word
-  maxGuesses: 6       // maximum allowed guesses
+  maxGuesses: 6,      // maximum attempts allowed
+  // you can add more settings here…
 };
 ```
 
-To change the glyphs (fonts/colors), edit `scripts/letters.js`:
-
-```js
-export default {
-  yellow_A: "\uE300",
-  black_A: "\uE340",
-  green_A: "\uE370",
-  // ...and so on
-};
-```
-
-Ensure your font pack supports these glyphs if you're using custom ones.
+To change the glyphs or colors, edit `scripts/letters.js`—replace the `"\uExxx"` mappings with your own font or Unicode symbols.
 
 ---
 
-## 🛠️ Development Notes
+## 🛠️ Development
 
-* Built with:
+* **Module imports**
+  Uses Bedrock’s `import { system, world } from "@minecraft/server"`
+* **Event hooks**
 
-  * `@minecraft/server` scripting module
-  * Bedrock’s event system (`afterEvents`, `beforeEvents`)
+  * `world.afterEvents.worldLoad` to initialize
+  * `world.beforeEvents.chatSend` to intercept `!wordle` and `!guess` commands
+* **Game management**
+  A `Map<playerId, Game>` keeps per‐player game instances.
 
-* Main logic:
-
-  * `Game` class handles gameplay per player
-  * Uses a `Map` to store active player sessions
-
-* Glyph display:
-
-  * Dynamically built per-letter from `letters.js` mapping
-
-Feel free to fork and expand with UI, animations, or multiplayer enhancements!
+Feel free to fork, extend with GUI dialogs, or integrate with custom fonts and textures!
 
 ---
 
 ## 📄 License
 
-Licensed under the [MIT License](LICENSE).
+This project is licensed under the [MIT License](LICENSE).
 
 ---
+
+```
