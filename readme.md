@@ -29,28 +29,6 @@ A simple “Wordle”–style mini-game for Minecraft Bedrock Edition, built wit
 
 ---
 
-## 📁 Repository Structure
-
-```
-
-/wordle-bedrock-addon
-├── behavior\_pack/
-│   ├── manifest.json
-│   └── … (optional custom behavior definitions)
-│
-├── scripts/                # Bedrock scripting pack
-│   ├── game.js             # Game logic (Wordle class)
-│   ├── letters.js          # Unicode color glyph mappings
-│   ├── index.js            # Entry point: chat event handlers
-│   └── config.js           # Game settings (wordLength, maxGuesses, etc.)
-│
-├── README.md               # This file
-└── package.json            # (Optional) for dependency management
-
-````
-
----
-
 1. **Configure** `scripts/config.js` if you want to change:
 
    ```js
@@ -127,4 +105,5 @@ This project is licensed under the [MIT License](LICENSE).
 
 ---
 
+```
 ```
