@@ -1,4 +1,3 @@
-
 # Minecraft Bedrock Wordle Add-On
 
 A simple “Wordle”–style mini-game for Minecraft Bedrock Edition, built with the official JavaScript Scripting API. Players can start a new Wordle game in chat, then guess letters against a hidden word of configurable length. Colored glyphs (green, yellow, black) display feedback exactly like classic Wordle.
@@ -105,5 +104,3 @@ This project is licensed under the [MIT License](LICENSE).
 
 ---
 
-```
-```
