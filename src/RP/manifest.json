@@ -1,0 +1,39 @@
+{
+    "format_version": 2,
+    "header": {
+        "name": "Wordle",
+        "description": "Wordle",
+        "min_engine_version": [
+            1,
+            19,
+            60
+        ],
+        "uuid": "d2e4b988-7b76-417c-be88-77c223ea3592",
+        "version": [
+            0,
+            0,
+            1
+        ]
+    },
+    "modules": [
+        {
+            "type": "resources",
+            "uuid": "86b43006-e855-4af3-9254-fb6b5b5fef5f",
+            "version": [
+                0,
+                0,
+                1
+            ]
+        }
+    ],
+    "dependencies": [
+        {
+            "uuid": "c7b7f488-2fd1-45f1-ab68-d6a284c77876",
+            "version": [
+                0,
+                0,
+                1
+            ]
+        }
+    ]
+}

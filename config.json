@@ -1,0 +1,50 @@
+{
+    "$schema": "https://raw.githubusercontent.com/Bedrock-OSS/regolith-schemas/main/config/v1.1.json",
+    "author": "cmca",
+    "name": "Wordle",
+    "packs": {
+        "behaviorPack": "./src/BP",
+        "resourcePack": "./src/RP"
+    },
+    "regolith": {
+        "dataPath": "./src/data",
+        "filterDefinitions": {
+            "cmcaBuild": {
+                "runWith": "shell",
+                "command": "cmca-build.cmd"
+            }
+        },
+        "profiles": {
+            "default": {
+                "filters": [
+                    {
+                        "filter": "cmcaBuild",
+                        "settings": {
+                            "\"envMode\"": "\"dev\"",
+                            "\"bundlerType\"": "\"none\"",
+                            "\"ts\"": "\"false\""
+                        }
+                    }
+                ],
+                "export": {
+                    "target": "development"
+                }
+            },
+            "export": {
+                "filters": [
+                    {
+                        "filter": "cmcaBuild",
+                        "settings": {
+                            "\"envMode\"": "\"release\"",
+                            "\"bundlerType\"": "\"none\"",
+                            "\"ts\"": "\"false\""
+                        }
+                    }
+                ],
+                "export": {
+                    "target": "local"
+                }
+            }
+        }
+    }
+}

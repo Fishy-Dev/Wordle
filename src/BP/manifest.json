@@ -1,0 +1,58 @@
+{
+    "format_version": 2,
+    "header": {
+        "name": "Wordle",
+        "description": "Wordle",
+        "min_engine_version": [
+            1,
+            19,
+            60
+        ],
+        "uuid": "c7b7f488-2fd1-45f1-ab68-d6a284c77876",
+        "version": [
+            0,
+            0,
+            1
+        ]
+    },
+    "modules": [
+        {
+            "type": "data",
+            "uuid": "fb2e30cb-3282-4947-a0ad-85e0113bd4f4",
+            "version": [
+                0,
+                0,
+                1
+            ]
+        },
+        {
+            "type": "script",
+            "language": "javascript",
+            "uuid": "5df5a723-22af-441b-b6d9-1989bdc1035d",
+            "entry": "scripts/main.js",
+            "version": [
+                1,
+                0,
+                0
+            ]
+        }
+    ],
+    "dependencies": [
+        {
+            "uuid": "d2e4b988-7b76-417c-be88-77c223ea3592",
+            "version": [
+                0,
+                0,
+                1
+            ]
+        },
+        {
+            "module_name": "@minecraft/server",
+            "version": "2.0.0-beta"
+        },
+        {
+            "module_name": "@minecraft/server-ui",
+            "version": "2.0.0-beta"
+        }
+    ]
+}
